@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
@@ -14,8 +14,8 @@ jogo3 = Jogo('Mortal Kombat', 'Luta', 'Super Nintendo')
 
 lista = [jogo1, jogo2, jogo3]
 
-@app.route('/inicio')
-def ola():
+@app.route('/')
+def index():
 
     return render_template('lista.html', titulo = 'Jogos', jogos = lista)
 
@@ -34,6 +34,6 @@ def criar():
     jogo = Jogo(nome, categoria, console)
     lista.append(jogo)
 
-    return render_template('lista.html', titulo = 'Jogos', jogos = lista)
+    return redirect('/')
 
 app.run(debug = True)
